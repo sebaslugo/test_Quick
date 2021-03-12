@@ -7,19 +7,6 @@ import Mantenimiento from './404'
 
 const role = sessionStorage.getItem('role')
     
-    const PrivateRoute = ({component: Component, ...rest}) => {
-
-        return (
-      
-            // Show the component only when the user is logged in
-            // Otherwise, redirect the user to /signin page
-            <Route {...rest} render={props => (
-              role === 'Administrador' || role === 'Coordinador'  ?
-                    <Component {...props}  />
-                : <Redirect to={`/login`} />
-            )} />
-        );
-      };
 
 export default function () {
 
@@ -31,9 +18,9 @@ export default function () {
             <Route path='/login'>
                 <Login/>
             </Route>
-            <PrivateRoute path='/home' component={() => <Home/>}/>
+            <Route path='/home' component={() => <Home/>}/>
 
-            <PrivateRoute exact path={'/mantenimiento'} component={() => <Mantenimiento/>}/>
+            <Route path={'/mantenimiento'} component={() => <Mantenimiento/>}/>
 
         </Switch>
     )
