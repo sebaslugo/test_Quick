@@ -24,13 +24,7 @@ export default function List( ) {
   const dispatch = useDispatch()
   const {user} = useSelector(store => store.data)
   const  [profile,setProfile] = useState({})
-  const menu = (
-    <Card>
-      <Text>{profile.name}</Text>
-      <Text>{profile.role}</Text>
-    </Card>
-    
-  )
+
   function logout () {
     sessionStorage.removeItem('role')
     dispatch(LogOut()) 
@@ -55,7 +49,7 @@ export default function List( ) {
           
         />
         <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-          <Button onClick={logout} style={{marginRight:'10px'}}>LogOut</Button>
+          <Button onClick={logout} shape='round' style={{backgroundColor:'white',color:'black',marginRight:'10px'}}>LogOut</Button>
           <Avatar style={{marginRight:'10px'}}><UserOutlined/></Avatar>
           <Text>{profile.name}</Text>
           <Text>{`(${profile.role})`}</Text>
