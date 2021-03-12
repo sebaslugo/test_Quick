@@ -9,25 +9,19 @@ import {getData} from '../../../../redux/actions'
 
 const List = () => {
     const dispatch = useDispatch();
-    const info = useSelector(store => store.data)
-    const [data,setData] = useState([])
-    const [state,setState] = useState({
-        sortedInfo: {},
-    });
+    const info = useSelector(store => store.data.data)
+
+
     useEffect(() => {
+      if(!info.length){
+        console.log('ola')
         dispatch(getData())
+      }    
     },[])
 
-    useEffect(() => {
-        setData(info.data)
-    },[info.data])
+    
 
-    const handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters',sorter);
-        setState({
-          sortedInfo: sorter,
-        });
-    };
+
     const columns = [
         {
           title: 'Atleta',
@@ -38,9 +32,6 @@ const List = () => {
           dataIndex: 'age',
           dataIndex: 'age',
           key: 'age',
-          sorter: (a, b) => a.age - b.age,
-          sortOrder: state.sortedInfo.columnKey === 'age' && state.sortedInfo.order,
-          ellipsis: true,
 
         },
         {
@@ -80,9 +71,8 @@ const List = () => {
     return (
         <div>
         <Table
-            onChange={handleChange}
             columns={columns}
-            dataSource={data}
+            dataSource={info }
             scroll={{x:1000, y: 350 }}
 
         />
